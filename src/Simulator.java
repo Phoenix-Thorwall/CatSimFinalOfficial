@@ -42,6 +42,13 @@ public class Simulator extends JFrame implements ActionListener {
         waterBar.setValue(100);
         feedBar.setValue(100);
         batheBar.setValue(100);
+
+        Timer vetTimer = new Timer(1000, null);
+        Timer sleepTimer = new Timer(1000, null);
+        Timer playTimer = new Timer(1000, null);
+        Timer waterTimer = new Timer(1000, null);
+        Timer feedTimer = new Timer(1000, null);
+        Timer batheTimer = new Timer(1000, null);
     }
 
     public void createUIComponents() {
