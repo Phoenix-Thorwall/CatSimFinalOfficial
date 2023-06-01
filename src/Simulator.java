@@ -45,6 +45,7 @@ public class Simulator extends JFrame implements ActionListener {
         batheBar.setValue(100);
 
         Timer gameTimer = new Timer(1000, null);
+        seconds = 0;
 
     }
 
@@ -56,11 +57,23 @@ public class Simulator extends JFrame implements ActionListener {
 
 
     public void addActionListener() {
-
     };
+
+    private void setupListeners(){
+        gameTimer.addActionListener(this);
+    }
+
+    public void timerFires(){
+        seconds++;
+        //now we can make various if statements based on what multiple
+        //of a number seconds is
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
+        if (source instanceof Timer){
+            timerFires();
+        }
     }
 }
