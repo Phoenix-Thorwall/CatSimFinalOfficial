@@ -18,6 +18,7 @@ public class Simulator extends JFrame implements ActionListener {
     private JLabel label1;
     private JPanel JPanel1;
     private JPanel catSpace;
+    private int seconds;
 
     public Simulator(GUI g) {
         createUIComponents();
@@ -54,7 +55,9 @@ public class Simulator extends JFrame implements ActionListener {
 
 
 
-    public void addActionListener() {};
+    public void addActionListener() {
+
+    };
 
     @Override
     public void actionPerformed(ActionEvent e) {
