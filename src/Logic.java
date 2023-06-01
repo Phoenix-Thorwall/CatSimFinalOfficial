@@ -13,6 +13,8 @@ public class Logic {
         Image happyCatPlaying = new ImageIcon("happyCatPlaying").getImage();
         Image happyCatSleeping = new ImageIcon("happyCatSleeping").getImage();
         Image sadCat = new ImageIcon("sadCat").getImage();
+
+
     }
 
 }
