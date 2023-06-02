@@ -51,17 +51,17 @@ public class Simulator extends JFrame implements ActionListener {
         feedBar.setValue(100);
         batheBar.setValue(100);
 
-        Timer gameTimer = new Timer(1000, null);
+        gameTimer = new Timer(1000, null);
         seconds = 0;
 
-        deadCat = new ImageIcon(getClass().getResource("deadCat")).getImage();
-        happyCat = new ImageIcon(getClass().getResource("happyCat")).getImage();
-        happyCatAtVet = new ImageIcon(getClass().getResource("happyCatAtVet")).getImage();
-        happyCatBathing = new ImageIcon(getClass().getResource("happyCatBathing")).getImage();
-        happyCatDrinking = new ImageIcon(getClass().getResource("happyCatDrinking")).getImage();
-        happyCatEating = new ImageIcon(getClass().getResource("happyCatEating")).getImage();
-        happyCatPlaying = new ImageIcon(getClass().getResource("happyCatPlaying")).getImage();
-        happyCatSleeping = new ImageIcon(getClass().getResource("happyCatSleeping")).getImage();
+        deadCat = new ImageIcon("src//deadCat.jpg").getImage();
+        happyCat = new ImageIcon("src//happyCat.jpg").getImage();
+        happyCatAtVet = new ImageIcon("src//happyCatAtVet.jpg").getImage();
+        happyCatBathing = new ImageIcon("src//happyCatBathing.jpg").getImage();
+        happyCatDrinking = new ImageIcon("src//happyCatDrinking.jpg").getImage();
+        happyCatEating = new ImageIcon("src//happyCatEating.jpg").getImage();
+        happyCatPlaying = new ImageIcon("src//happyCatPlaying.jpg").getImage();
+        happyCatSleeping = new ImageIcon("src//happyCatSleeping.jpg").getImage();
 
         imageLabel.setIcon((Icon) happyCat);
 
@@ -101,6 +101,47 @@ public class Simulator extends JFrame implements ActionListener {
         Object source = e.getSource();
         if (source instanceof Timer){
             timerFires();
+        } else if (source instanceof JButton) {
+            JButton button = (JButton) source;
+            String buttonText = button.getText();
+            int waiting;
+            if (buttonText.equals("Feed")) {
+                waiting = seconds + 4;
+                while (seconds < waiting) {
+                    imageLabel.setIcon((Icon) happyCatEating);
+                }
+                imageLabel.setIcon((Icon) happyCat);
+            } else if (buttonText.equals("Give Water")) {
+                waiting = seconds + 4;
+                while (seconds < waiting) {
+                    imageLabel.setIcon((Icon) happyCatDrinking);
+                }
+                imageLabel.setIcon((Icon) happyCat);
+            } else if (buttonText.equals("Play")) {
+                waiting = seconds + 4;
+                while (seconds < waiting) {
+                    imageLabel.setIcon((Icon) happyCatPlaying);
+                }
+                imageLabel.setIcon((Icon) happyCat);
+            } else if (buttonText.equals("Take to Vet")) {
+                waiting = seconds + 4;
+                while (seconds < waiting) {
+                    imageLabel.setIcon((Icon) happyCatAtVet);
+                }
+                imageLabel.setIcon((Icon) happyCat);
+            } else if (buttonText.equals("Bathe")) {
+                waiting = seconds + 4;
+                while (seconds < waiting) {
+                    imageLabel.setIcon((Icon) happyCatBathing);
+                }
+                imageLabel.setIcon((Icon) happyCat);
+            } else if (buttonText.equals("Take Nap")) {
+                waiting = seconds + 4;
+                while (seconds < waiting) {
+                    imageLabel.setIcon((Icon) happyCatSleeping);
+                }
+                imageLabel.setIcon((Icon) happyCat);
+            }
         }
     }
-}
+    }
