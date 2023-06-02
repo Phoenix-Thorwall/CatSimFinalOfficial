@@ -23,17 +23,16 @@ public class Simulator extends JFrame implements ActionListener {
     private JLabel imageLabel;
     private int seconds;
 
-    private Image deadCat;
-    private Image happyCat;
-    private Image happyCatAtVet;
-    private Image happyCatBathing;
-    private Image happyCatDrinking;
-    private Image happyCatEating;
-    private Image happyCatPlaying;
-    private Image happyCatSleeping;
+    private ImageIcon deadCat;
+    private ImageIcon happyCat;
+    private ImageIcon happyCatAtVet;
+    private ImageIcon happyCatBathing;
+    private ImageIcon happyCatDrinking;
+    private ImageIcon happyCatEating;
+    private ImageIcon happyCatPlaying;
+    private ImageIcon happyCatSleeping;
 
     public Simulator(GUI g) {
-        createUIComponents();
 
         setContentPane(panel1);
         setLocationRelativeTo(null);
@@ -54,24 +53,27 @@ public class Simulator extends JFrame implements ActionListener {
         gameTimer = new Timer(1000, null);
         seconds = 0;
 
-        deadCat = new ImageIcon("src//deadCat.jpg").getImage();
-        happyCat = new ImageIcon("src//happyCat.jpg").getImage();
-        happyCatAtVet = new ImageIcon("src//happyCatAtVet.jpg").getImage();
-        happyCatBathing = new ImageIcon("src//happyCatBathing.jpg").getImage();
-        happyCatDrinking = new ImageIcon("src//happyCatDrinking.jpg").getImage();
-        happyCatEating = new ImageIcon("src//happyCatEating.jpg").getImage();
-        happyCatPlaying = new ImageIcon("src//happyCatPlaying.jpg").getImage();
-        happyCatSleeping = new ImageIcon("src//happyCatSleeping.jpg").getImage();
+        deadCat = new ImageIcon("src/deadCat.jpg");
+        happyCat = new ImageIcon("src/happyCat.jpg");
+        happyCatAtVet = new ImageIcon("src/happyCatAtVet.jpg");
+        happyCatBathing = new ImageIcon("src/happyCatBathing.jpg");
+        happyCatDrinking = new ImageIcon("src/happyCatDrinking.jpg");
+        happyCatEating = new ImageIcon("src/happyCatEating.jpg");
+        happyCatPlaying = new ImageIcon("src/happyCatPlaying.jpg");
+        happyCatSleeping = new ImageIcon("src/happyCatSleeping.jpg");
 
-        imageLabel.setIcon((Icon) happyCat);
+        imageLabel.setIcon(happyCat);
 
         setupListeners();
+        createUIComponents();
+
 
     }
 
     public void createUIComponents() {
-        setVisible(true);
         setSize(500, 500);
+
+        setVisible(true);
     }
 
 
@@ -92,8 +94,9 @@ public class Simulator extends JFrame implements ActionListener {
 
     public void timerFires(){
         seconds++;
-        //now we can make various if statements based on what multiple
-        //of a number seconds is
+        if (seconds % 5 == 0){
+            vetBar.setValue(vetBar.getValue() - 10);
+        }
     }
 
     @Override
