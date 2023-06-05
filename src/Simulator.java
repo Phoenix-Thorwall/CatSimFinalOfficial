@@ -95,7 +95,27 @@ public class Simulator extends JFrame implements ActionListener {
     public void timerFires(){
         seconds++;
         if (seconds % 5 == 0){
-            vetBar.setValue(vetBar.getValue() - 10);
+            waterBar.setValue(waterBar.getValue() - 10);
+        }
+        if (seconds % 15 == 0){
+            feedBar.setValue(feedBar.getValue() - 15);
+        }
+        if (seconds % 10 == 0){
+            playBar.setValue(playBar.getValue() - 5);
+        }
+        if (seconds % 20 == 0){
+            batheBar.setValue(batheBar.getValue() - 20);
+        }
+        if (seconds % 25 == 0){
+            sleepBar.setValue(sleepBar.getValue() - 20);
+        }
+        if ((waterBar.getValue() == 50
+                || feedBar.getValue() == 40
+                || playBar.getValue() == 50
+                || sleepBar.getValue() == 50
+                || batheBar.getValue() == 60)
+                || seconds % 35 == 0){
+            vetBar.setValue(vetBar.getValue() - 15);
         }
     }
 
@@ -108,42 +128,59 @@ public class Simulator extends JFrame implements ActionListener {
             JButton button = (JButton) source;
             String buttonText = button.getText();
             int waiting;
+            int barTemp;
             if (buttonText.equals("Feed")) {
-                waiting = seconds + 4;
-                while (seconds < waiting) {
-                    imageLabel.setIcon((Icon) happyCatEating);
+                barTemp = feedBar.getValue();
+                waiting = seconds + 3;
+                imageLabel.setIcon(happyCatEating);
+                if (seconds == waiting) {
+                    imageLabel.setIcon(happyCat);
                 }
-                imageLabel.setIcon((Icon) happyCat);
+                feedBar.setValue(barTemp + 10);
             } else if (buttonText.equals("Give Water")) {
-                waiting = seconds + 4;
-                while (seconds < waiting) {
-                    imageLabel.setIcon((Icon) happyCatDrinking);
+                barTemp = waterBar.getValue();
+                waiting = seconds + 3;
+                imageLabel.setIcon(happyCatDrinking);
+                if (seconds == waiting) {
+                    imageLabel.setIcon(happyCat);
                 }
-                imageLabel.setIcon((Icon) happyCat);
+                waterBar.setValue(barTemp + 10);
             } else if (buttonText.equals("Play")) {
-                waiting = seconds + 4;
-                while (seconds < waiting) {
-                    imageLabel.setIcon((Icon) happyCatPlaying);
+                barTemp = playBar.getValue();
+                waiting = seconds + 3;
+                imageLabel.setIcon(happyCatPlaying);
+                if (seconds == waiting) {
+                    imageLabel.setIcon(happyCat);
                 }
-                imageLabel.setIcon((Icon) happyCat);
+                playBar.setValue(barTemp + 10);
             } else if (buttonText.equals("Take to Vet")) {
-                waiting = seconds + 4;
-                while (seconds < waiting) {
-                    imageLabel.setIcon((Icon) happyCatAtVet);
+                waiting = seconds + 3;
+                imageLabel.setIcon(happyCatAtVet);
+                if (seconds == waiting) {
+                    imageLabel.setIcon(happyCat);
                 }
-                imageLabel.setIcon((Icon) happyCat);
+                vetBar.setValue(100);
+                feedBar.setValue(100);
+                waterBar.setValue(100);
+                playBar.setValue(100);
+                batheBar.setValue(100);
+                sleepBar.setValue(100);
             } else if (buttonText.equals("Bathe")) {
-                waiting = seconds + 4;
-                while (seconds < waiting) {
-                    imageLabel.setIcon((Icon) happyCatBathing);
+                barTemp = batheBar.getValue();
+                waiting = seconds + 3;
+                imageLabel.setIcon(happyCatBathing);
+                if (seconds == waiting) {
+                    imageLabel.setIcon(happyCat);
                 }
-                imageLabel.setIcon((Icon) happyCat);
+                batheBar.setValue(barTemp + 10);
             } else if (buttonText.equals("Take Nap")) {
-                waiting = seconds + 4;
-                while (seconds < waiting) {
-                    imageLabel.setIcon((Icon) happyCatSleeping);
+                barTemp = sleepBar.getValue();
+                waiting = seconds + 3;
+                imageLabel.setIcon(happyCatSleeping);
+                if (seconds < waiting) {
+                    imageLabel.setIcon(happyCat);
                 }
-                imageLabel.setIcon((Icon) happyCat);
+                sleepBar.setValue(barTemp + 10);
             }
         }
     }
