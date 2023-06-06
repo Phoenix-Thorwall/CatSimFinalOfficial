@@ -103,9 +103,6 @@ public class Simulator extends JFrame implements ActionListener {
         if (seconds % 15 == 0){
             feedBar.setValue(feedBar.getValue() - 15);
         }
-//        if (seconds % 10 == 0){
-//            playBar.setValue(playBar.getValue() - 5);
-//        }
         if (seconds % 20 == 0){
             batheBar.setValue(batheBar.getValue() - 20);
         }
@@ -120,12 +117,15 @@ public class Simulator extends JFrame implements ActionListener {
                 || seconds % 35 == 0){
             vetBar.setValue(vetBar.getValue() - 15);
         }
-        if (vetBar.getValue() == 40){
+        if (vetBar.getValue() > 40){
+            imageLabel.setIcon(happyCat);
+        }
+        if (vetBar.getValue() <= 40){
             imageLabel.setIcon(sadCat);
         }
-        if (vetBar.getValue() == 0);{
+        if (vetBar.getValue() == 0) {
             imageLabel.setIcon(deadCat);
-            //Insert the code that ends the game
+
         }
     }
 
@@ -137,43 +137,23 @@ public class Simulator extends JFrame implements ActionListener {
         } else if (source instanceof JButton) {
             JButton button = (JButton) source;
             String buttonText = button.getText();
-            int waiting;
             int barTemp;
             if (buttonText.equals("Feed")) {
                 barTemp = feedBar.getValue();
-                waiting = seconds + 3;
                 imageLabel.setIcon(happyCatEating);
-                if (seconds == waiting) {
-                    imageLabel.setIcon(happyCat);
-                }
                 feedBar.setValue(barTemp + 10);
             } else if (buttonText.equals("Give Water")) {
                 barTemp = waterBar.getValue();
-                waiting = seconds + 3;
                 imageLabel.setIcon(happyCatDrinking);
-                if (seconds == waiting) {
-                    imageLabel.setIcon(happyCat);
-                }
                 waterBar.setValue(barTemp + 10);
             } else if (buttonText.equals("Play")) {
-//                barTemp = playBar.getValue();
-//                waiting = seconds + 3;
-//                imageLabel.setIcon(happyCatPlaying);
-//                if (seconds == waiting) {
-//                    imageLabel.setIcon(happyCat);
-//                }
-//                playBar.setValue(barTemp + 10);
                 imageLabel.setIcon(happyCatPlaying);
                 playBar.setValue(playBar.getValue() - 20);
                 if (playBar.getValue() <= 20){
-                    vetBar.setValue(vetBar.getValue() - 5);
+                    sleepBar.setValue(sleepBar.getValue() - 5);
                 }
             } else if (buttonText.equals("Take to Vet")) {
-                waiting = seconds + 3;
                 imageLabel.setIcon(happyCatAtVet);
-                if (seconds == waiting) {
-                    imageLabel.setIcon(happyCat);
-                }
                 vetBar.setValue(100);
                 feedBar.setValue(100);
                 waterBar.setValue(100);
@@ -182,19 +162,11 @@ public class Simulator extends JFrame implements ActionListener {
                 sleepBar.setValue(100);
             } else if (buttonText.equals("Bathe")) {
                 barTemp = batheBar.getValue();
-                waiting = seconds + 3;
                 imageLabel.setIcon(happyCatBathing);
-                if (seconds == waiting) {
-                    imageLabel.setIcon(happyCat);
-                }
                 batheBar.setValue(barTemp + 10);
             } else if (buttonText.equals("Take Nap")) {
                 barTemp = sleepBar.getValue();
-                waiting = seconds + 3;
                 imageLabel.setIcon(happyCatSleeping);
-                if (seconds == waiting) {
-                    imageLabel.setIcon(happyCat);
-                }
                 sleepBar.setValue(barTemp + 10);
             }
         }
