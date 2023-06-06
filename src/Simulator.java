@@ -125,7 +125,7 @@ public class Simulator extends JFrame implements ActionListener {
         }
         if (vetBar.getValue() == 0) {
             imageLabel.setIcon(deadCat);
-
+            label1.setText("GAME OVER");
         }
     }
 
