@@ -31,6 +31,7 @@ public class Simulator extends JFrame implements ActionListener {
     private ImageIcon happyCatEating;
     private ImageIcon happyCatPlaying;
     private ImageIcon happyCatSleeping;
+    private ImageIcon sadCat;
 
     public Simulator(GUI g) {
 
@@ -61,6 +62,7 @@ public class Simulator extends JFrame implements ActionListener {
         happyCatEating = new ImageIcon("src/happyCatEating.jpg");
         happyCatPlaying = new ImageIcon("src/happyCatPlaying.jpg");
         happyCatSleeping = new ImageIcon("src/happyCatSleeping.jpg");
+        sadCat = new ImageIcon("src/sadCat.jpg");
 
         imageLabel.setIcon(happyCat);
 
@@ -116,6 +118,12 @@ public class Simulator extends JFrame implements ActionListener {
                 || batheBar.getValue() == 60)
                 || seconds % 35 == 0){
             vetBar.setValue(vetBar.getValue() - 15);
+        }
+        if (vetBar.getValue() == 40){
+            imageLabel.setIcon(sadCat);
+        }
+        if (vetBar.getValue() == 0);{
+
         }
     }
 
@@ -177,7 +185,7 @@ public class Simulator extends JFrame implements ActionListener {
                 barTemp = sleepBar.getValue();
                 waiting = seconds + 3;
                 imageLabel.setIcon(happyCatSleeping);
-                if (seconds < waiting) {
+                if (seconds == waiting) {
                     imageLabel.setIcon(happyCat);
                 }
                 sleepBar.setValue(barTemp + 10);
