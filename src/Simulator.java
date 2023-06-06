@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class Simulator extends JFrame implements ActionListener {
@@ -21,6 +20,7 @@ public class Simulator extends JFrame implements ActionListener {
     private JPanel JPanel1;
     private JPanel catSpace;
     private JLabel imageLabel;
+    private JLabel CoinsLabel;
     private int seconds;
     private int coins;
 
@@ -54,6 +54,7 @@ public class Simulator extends JFrame implements ActionListener {
 
         gameTimer = new Timer(1000, null);
         seconds = 0;
+        coins = 15;
 
         deadCat = new ImageIcon("src/deadCat.jpg");
         happyCat = new ImageIcon("src/happyCat.jpg");
@@ -96,6 +97,7 @@ public class Simulator extends JFrame implements ActionListener {
     }
 
     public void timerFires(){
+        CoinsLabel.setText("Coins: " + coins);
         seconds++;
         if (seconds % 5 == 0){
             waterBar.setValue(waterBar.getValue() - 10);
@@ -139,20 +141,24 @@ public class Simulator extends JFrame implements ActionListener {
             String buttonText = button.getText();
             int barTemp;
             if (buttonText.equals("Feed")) {
+                coins -= 10;
                 barTemp = feedBar.getValue();
                 imageLabel.setIcon(happyCatEating);
                 feedBar.setValue(barTemp + 10);
             } else if (buttonText.equals("Give Water")) {
+                coins -= 5;
                 barTemp = waterBar.getValue();
                 imageLabel.setIcon(happyCatDrinking);
                 waterBar.setValue(barTemp + 10);
             } else if (buttonText.equals("Play")) {
+                coins += 15;
                 imageLabel.setIcon(happyCatPlaying);
                 playBar.setValue(playBar.getValue() - 20);
                 if (playBar.getValue() <= 20){
                     sleepBar.setValue(sleepBar.getValue() - 5);
                 }
             } else if (buttonText.equals("Take to Vet")) {
+                coins -= 25;
                 imageLabel.setIcon(happyCatAtVet);
                 vetBar.setValue(100);
                 feedBar.setValue(100);
@@ -161,6 +167,7 @@ public class Simulator extends JFrame implements ActionListener {
                 batheBar.setValue(100);
                 sleepBar.setValue(100);
             } else if (buttonText.equals("Bathe")) {
+                coins -= 10;
                 barTemp = batheBar.getValue();
                 imageLabel.setIcon(happyCatBathing);
                 batheBar.setValue(barTemp + 10);
@@ -168,6 +175,7 @@ public class Simulator extends JFrame implements ActionListener {
                 barTemp = sleepBar.getValue();
                 imageLabel.setIcon(happyCatSleeping);
                 sleepBar.setValue(barTemp + 10);
+                playBar.setValue(playBar.getValue() + 25);
             }
         }
     }
