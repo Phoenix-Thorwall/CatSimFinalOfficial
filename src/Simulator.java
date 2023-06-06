@@ -22,6 +22,7 @@ public class Simulator extends JFrame implements ActionListener {
     private JPanel catSpace;
     private JLabel imageLabel;
     private int seconds;
+    private int coins;
 
     private ImageIcon deadCat;
     private ImageIcon happyCat;
@@ -102,9 +103,9 @@ public class Simulator extends JFrame implements ActionListener {
         if (seconds % 15 == 0){
             feedBar.setValue(feedBar.getValue() - 15);
         }
-        if (seconds % 10 == 0){
-            playBar.setValue(playBar.getValue() - 5);
-        }
+//        if (seconds % 10 == 0){
+//            playBar.setValue(playBar.getValue() - 5);
+//        }
         if (seconds % 20 == 0){
             batheBar.setValue(batheBar.getValue() - 20);
         }
@@ -113,7 +114,7 @@ public class Simulator extends JFrame implements ActionListener {
         }
         if ((waterBar.getValue() == 50
                 || feedBar.getValue() == 40
-                || playBar.getValue() == 50
+                || playBar.getValue() == 0
                 || sleepBar.getValue() == 50
                 || batheBar.getValue() == 60)
                 || seconds % 35 == 0){
@@ -123,7 +124,8 @@ public class Simulator extends JFrame implements ActionListener {
             imageLabel.setIcon(sadCat);
         }
         if (vetBar.getValue() == 0);{
-
+            imageLabel.setIcon(deadCat);
+            //Insert the code that ends the game
         }
     }
 
@@ -154,13 +156,18 @@ public class Simulator extends JFrame implements ActionListener {
                 }
                 waterBar.setValue(barTemp + 10);
             } else if (buttonText.equals("Play")) {
-                barTemp = playBar.getValue();
-                waiting = seconds + 3;
+//                barTemp = playBar.getValue();
+//                waiting = seconds + 3;
+//                imageLabel.setIcon(happyCatPlaying);
+//                if (seconds == waiting) {
+//                    imageLabel.setIcon(happyCat);
+//                }
+//                playBar.setValue(barTemp + 10);
                 imageLabel.setIcon(happyCatPlaying);
-                if (seconds == waiting) {
-                    imageLabel.setIcon(happyCat);
+                playBar.setValue(playBar.getValue() - 20);
+                if (playBar.getValue() <= 20){
+                    vetBar.setValue(vetBar.getValue() - 5);
                 }
-                playBar.setValue(barTemp + 10);
             } else if (buttonText.equals("Take to Vet")) {
                 waiting = seconds + 3;
                 imageLabel.setIcon(happyCatAtVet);
