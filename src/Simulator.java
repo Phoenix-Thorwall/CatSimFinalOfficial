@@ -67,6 +67,7 @@ public class Simulator extends JFrame implements ActionListener {
         sadCat = new ImageIcon("src/sadCat.jpg");
 
         imageLabel.setIcon(happyCat);
+        imageLabel.setText("Happy!!");
 
         setupListeners();
         createUIComponents();
@@ -141,15 +142,25 @@ public class Simulator extends JFrame implements ActionListener {
             String buttonText = button.getText();
             int barTemp;
             if (buttonText.equals("Feed")) {
-                coins -= 10;
-                barTemp = feedBar.getValue();
-                imageLabel.setIcon(happyCatEating);
-                feedBar.setValue(barTemp + 10);
+                if (coins - 10 >= 0){
+                    coins -= 10;
+                    barTemp = feedBar.getValue();
+                    imageLabel.setIcon(happyCatEating);
+                    feedBar.setValue(barTemp + 10);
+                } else{
+                    imageLabel.setText("Not enough coins :(");
+                }
+
             } else if (buttonText.equals("Give Water")) {
-                coins -= 5;
-                barTemp = waterBar.getValue();
-                imageLabel.setIcon(happyCatDrinking);
-                waterBar.setValue(barTemp + 10);
+                if (coins - 5 >= 0){
+                    coins -= 5;
+                    barTemp = waterBar.getValue();
+                    imageLabel.setIcon(happyCatDrinking);
+                    waterBar.setValue(barTemp + 10);
+                } else{
+                    imageLabel.setText("Not enough coins :(");
+                }
+
             } else if (buttonText.equals("Play")) {
                 coins += 15;
                 imageLabel.setIcon(happyCatPlaying);
@@ -158,19 +169,29 @@ public class Simulator extends JFrame implements ActionListener {
                     sleepBar.setValue(sleepBar.getValue() - 5);
                 }
             } else if (buttonText.equals("Take to Vet")) {
-                coins -= 25;
-                imageLabel.setIcon(happyCatAtVet);
-                vetBar.setValue(100);
-                feedBar.setValue(100);
-                waterBar.setValue(100);
-                playBar.setValue(100);
-                batheBar.setValue(100);
-                sleepBar.setValue(100);
+                if (coins - 25 >= 0){
+                    coins -= 25;
+                    imageLabel.setIcon(happyCatAtVet);
+                    vetBar.setValue(100);
+                    feedBar.setValue(100);
+                    waterBar.setValue(100);
+                    playBar.setValue(100);
+                    batheBar.setValue(100);
+                    sleepBar.setValue(100);
+                } else{
+                    imageLabel.setText("Not enough coins :(");
+                }
+
             } else if (buttonText.equals("Bathe")) {
-                coins -= 10;
-                barTemp = batheBar.getValue();
-                imageLabel.setIcon(happyCatBathing);
-                batheBar.setValue(barTemp + 10);
+                if (coins - 10 >= 0){
+                    coins -= 10;
+                    barTemp = batheBar.getValue();
+                    imageLabel.setIcon(happyCatBathing);
+                    batheBar.setValue(barTemp + 10);
+                } else{
+                    imageLabel.setText("Not enough coins :(");
+                }
+
             } else if (buttonText.equals("Take Nap")) {
                 barTemp = sleepBar.getValue();
                 imageLabel.setIcon(happyCatSleeping);
