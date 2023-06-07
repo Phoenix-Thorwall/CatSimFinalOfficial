@@ -24,7 +24,6 @@ public class Simulator extends JFrame implements ActionListener {
     private int seconds;
     private int coins;
 
-    private ImageIcon deadCat;
     private ImageIcon happyCat;
     private ImageIcon happyCatAtVet;
     private ImageIcon happyCatBathing;
@@ -56,7 +55,7 @@ public class Simulator extends JFrame implements ActionListener {
         seconds = 0;
         coins = 15;
 
-        deadCat = new ImageIcon("src/deadCat.jpg");
+
         happyCat = new ImageIcon("src/happyCat.jpg");
         happyCatAtVet = new ImageIcon("src/happyCatAtVet.jpg");
         happyCatBathing = new ImageIcon("src/happyCatBathing.jpg");
@@ -84,7 +83,11 @@ public class Simulator extends JFrame implements ActionListener {
 
 
     public void addActionListener() {
-    };
+    }
+
+    public int getSeconds(){
+        return seconds;
+    }
 
     private void setupListeners(){
         takeToVetButton.addActionListener(this);
@@ -127,8 +130,12 @@ public class Simulator extends JFrame implements ActionListener {
             imageLabel.setIcon(sadCat);
         }
         if (vetBar.getValue() == 0) {
-            imageLabel.setIcon(deadCat);
-            label1.setText("GAME OVER");
+
+            gameTimer.stop();
+            GameOver go = new GameOver();
+
+//            imageLabel.setIcon(deadCat);
+//            label1.setText("GAME OVER");
         }
     }
 
