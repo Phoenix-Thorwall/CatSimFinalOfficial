@@ -150,6 +150,7 @@ public class Simulator extends JFrame implements ActionListener {
             int barTemp;
             if (buttonText.equals("Feed")) {
                 if (coins - 10 >= 0){
+                    imageLabel.setText("OM NOM NOM NOM");
                     coins -= 10;
                     barTemp = feedBar.getValue();
                     imageLabel.setIcon(happyCatEating);
@@ -160,6 +161,7 @@ public class Simulator extends JFrame implements ActionListener {
 
             } else if (buttonText.equals("Give Water")) {
                 if (coins - 5 >= 0){
+                    imageLabel.setText("GULP GULP GULP");
                     coins -= 5;
                     barTemp = waterBar.getValue();
                     imageLabel.setIcon(happyCatDrinking);
@@ -169,6 +171,7 @@ public class Simulator extends JFrame implements ActionListener {
                 }
 
             } else if (buttonText.equals("Play")) {
+                imageLabel.setText("HOORAY!!!");
                 coins += 15;
                 imageLabel.setIcon(happyCatPlaying);
                 playBar.setValue(playBar.getValue() - 20);
@@ -177,6 +180,7 @@ public class Simulator extends JFrame implements ActionListener {
                 }
             } else if (buttonText.equals("Take to Vet")) {
                 if (coins - 25 >= 0){
+                    imageLabel.setText("ALL BETTER :)");
                     coins -= 25;
                     imageLabel.setIcon(happyCatAtVet);
                     vetBar.setValue(100);
@@ -191,6 +195,7 @@ public class Simulator extends JFrame implements ActionListener {
 
             } else if (buttonText.equals("Bathe")) {
                 if (coins - 10 >= 0){
+                    imageLabel.setText("SCRUB A DUB DUB");
                     coins -= 10;
                     barTemp = batheBar.getValue();
                     imageLabel.setIcon(happyCatBathing);
@@ -200,6 +205,7 @@ public class Simulator extends JFrame implements ActionListener {
                 }
 
             } else if (buttonText.equals("Take Nap")) {
+                imageLabel.setText("A HONK SHOO");
                 barTemp = sleepBar.getValue();
                 imageLabel.setIcon(happyCatSleeping);
                 sleepBar.setValue(barTemp + 10);
