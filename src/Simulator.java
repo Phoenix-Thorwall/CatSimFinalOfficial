@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class Simulator extends JFrame implements ActionListener {
@@ -57,13 +58,45 @@ public class Simulator extends JFrame implements ActionListener {
 
 
         happyCat = new ImageIcon("src/happyCat.jpg");
+        Image happyData = happyCat.getImage();
+        Image scaledHappy = happyData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        happyCat = new ImageIcon(scaledHappy);
+
+
         happyCatAtVet = new ImageIcon("src/happyCatAtVet.jpg");
+        Image vetData = happyCat.getImage();
+        Image scaledVet = vetData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        happyCatAtVet = new ImageIcon(scaledVet);
+
         happyCatBathing = new ImageIcon("src/happyCatBathing.jpg");
+        Image bathData = happyCat.getImage();
+        Image scaledBath = bathData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        happyCatBathing = new ImageIcon(scaledBath);
+
         happyCatDrinking = new ImageIcon("src/happyCatDrinking.jpg");
+        Image drinkData = happyCatDrinking.getImage();
+        Image scaledDrink = drinkData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        happyCatDrinking = new ImageIcon(scaledDrink);
+
         happyCatEating = new ImageIcon("src/happyCatEating.jpg");
+        Image munchData = happyCatEating.getImage();
+        Image scaledMunch = munchData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        happyCatEating = new ImageIcon(scaledMunch);
+
         happyCatPlaying = new ImageIcon("src/happyCatPlaying.jpg");
+        Image playData = happyCatPlaying.getImage();
+        Image scaledPlay = playData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        happyCatPlaying = new ImageIcon(scaledPlay);
+
         happyCatSleeping = new ImageIcon("src/happyCatSleeping.jpg");
+        Image eepyData = happyCatSleeping.getImage();
+        Image scaledEepy = eepyData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        happyCatSleeping = new ImageIcon(scaledEepy);
+
         sadCat = new ImageIcon("src/sadCat.jpg");
+        Image sadData = sadCat.getImage();
+        Image scaledSad = sadData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        sadCat = new ImageIcon(scaledHappy);
 
         imageLabel.setIcon(happyCat);
         imageLabel.setText("Happy!!");
@@ -130,10 +163,8 @@ public class Simulator extends JFrame implements ActionListener {
             imageLabel.setIcon(sadCat);
         }
         if (vetBar.getValue() == 0) {
-
             gameTimer.stop();
             GameOver go = new GameOver();
-
 //            imageLabel.setIcon(deadCat);
 //            label1.setText("GAME OVER");
         }
