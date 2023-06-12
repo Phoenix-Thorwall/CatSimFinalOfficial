@@ -8,6 +8,7 @@ public class GUI extends JFrame implements ActionListener {
     private String catName;
     private JTextField typeTheNameYouTextField;
     private JButton startGameButton;
+    private JLabel instructions;
 
     public GUI() {
         createUIComponents();
@@ -22,7 +23,7 @@ public class GUI extends JFrame implements ActionListener {
 
     public void createUIComponents() {
         setVisible(true);
-        setSize(500, 500);
+        setSize(700, 400);
     }
 
     public String getCatName() {

@@ -22,6 +22,7 @@ public class Simulator extends JFrame implements ActionListener {
     private JPanel catSpace;
     private JLabel imageLabel;
     private JLabel CoinsLabel;
+    private JLabel emotion;
     private int seconds;
     private int coins;
 
@@ -33,8 +34,10 @@ public class Simulator extends JFrame implements ActionListener {
     private ImageIcon happyCatPlaying;
     private ImageIcon happyCatSleeping;
     private ImageIcon sadCat;
+    private GUI thisGUI;
 
     public Simulator(GUI g) {
+        thisGUI = g;
 
         setContentPane(panel1);
         setLocationRelativeTo(null);
@@ -59,47 +62,47 @@ public class Simulator extends JFrame implements ActionListener {
 
         happyCat = new ImageIcon("src/happyCat.jpg");
         Image happyData = happyCat.getImage();
-        Image scaledHappy = happyData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        Image scaledHappy = happyData.getScaledInstance(468, 360, Image.SCALE_SMOOTH);
         happyCat = new ImageIcon(scaledHappy);
 
 
         happyCatAtVet = new ImageIcon("src/happyCatAtVet.jpg");
-        Image vetData = happyCat.getImage();
-        Image scaledVet = vetData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        Image vetData = happyCatAtVet.getImage();
+        Image scaledVet = vetData.getScaledInstance(468, 360, Image.SCALE_SMOOTH);
         happyCatAtVet = new ImageIcon(scaledVet);
 
         happyCatBathing = new ImageIcon("src/happyCatBathing.jpg");
-        Image bathData = happyCat.getImage();
-        Image scaledBath = bathData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        Image bathData = happyCatBathing.getImage();
+        Image scaledBath = bathData.getScaledInstance(468, 360, Image.SCALE_SMOOTH);
         happyCatBathing = new ImageIcon(scaledBath);
 
         happyCatDrinking = new ImageIcon("src/happyCatDrinking.jpg");
         Image drinkData = happyCatDrinking.getImage();
-        Image scaledDrink = drinkData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        Image scaledDrink = drinkData.getScaledInstance(468, 360, Image.SCALE_SMOOTH);
         happyCatDrinking = new ImageIcon(scaledDrink);
 
         happyCatEating = new ImageIcon("src/happyCatEating.jpg");
         Image munchData = happyCatEating.getImage();
-        Image scaledMunch = munchData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        Image scaledMunch = munchData.getScaledInstance(468, 360, Image.SCALE_SMOOTH);
         happyCatEating = new ImageIcon(scaledMunch);
 
         happyCatPlaying = new ImageIcon("src/happyCatPlaying.jpg");
         Image playData = happyCatPlaying.getImage();
-        Image scaledPlay = playData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        Image scaledPlay = playData.getScaledInstance(468, 360, Image.SCALE_SMOOTH);
         happyCatPlaying = new ImageIcon(scaledPlay);
 
         happyCatSleeping = new ImageIcon("src/happyCatSleeping.jpg");
         Image eepyData = happyCatSleeping.getImage();
-        Image scaledEepy = eepyData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
+        Image scaledEepy = eepyData.getScaledInstance(468, 360, Image.SCALE_SMOOTH);
         happyCatSleeping = new ImageIcon(scaledEepy);
 
         sadCat = new ImageIcon("src/sadCat.jpg");
         Image sadData = sadCat.getImage();
-        Image scaledSad = sadData.getScaledInstance(36, 64, Image.SCALE_SMOOTH);
-        sadCat = new ImageIcon(scaledHappy);
+        Image scaledSad = sadData.getScaledInstance(468, 360, Image.SCALE_SMOOTH);
+        sadCat = new ImageIcon(scaledSad);
 
         imageLabel.setIcon(happyCat);
-        imageLabel.setText("Happy!!");
+        emotion.setText("Happy!!");
 
         setupListeners();
         createUIComponents();
@@ -108,7 +111,7 @@ public class Simulator extends JFrame implements ActionListener {
     }
 
     public void createUIComponents() {
-        setSize(500, 500);
+        setSize(1000, 500);
 
         setVisible(true);
     }
@@ -150,7 +153,7 @@ public class Simulator extends JFrame implements ActionListener {
         }
         if ((waterBar.getValue() == 50
                 || feedBar.getValue() == 40
-                || playBar.getValue() == 0
+                || playBar.getValue() == 40
                 || sleepBar.getValue() == 50
                 || batheBar.getValue() == 60)
                 || seconds % 35 == 0){
@@ -161,12 +164,11 @@ public class Simulator extends JFrame implements ActionListener {
         }
         if (vetBar.getValue() <= 40){
             imageLabel.setIcon(sadCat);
+            emotion.setText("I'm not feeling well :(");
         }
         if (vetBar.getValue() == 0) {
             gameTimer.stop();
-            GameOver go = new GameOver();
-//            imageLabel.setIcon(deadCat);
-//            label1.setText("GAME OVER");
+            GameOver go = new GameOver(thisGUI, this);
         }
     }
 
@@ -181,28 +183,28 @@ public class Simulator extends JFrame implements ActionListener {
             int barTemp;
             if (buttonText.equals("Feed")) {
                 if (coins - 10 >= 0){
-                    imageLabel.setText("OM NOM NOM NOM");
+                    emotion.setText("OM NOM NOM NOM");
                     coins -= 10;
                     barTemp = feedBar.getValue();
                     imageLabel.setIcon(happyCatEating);
                     feedBar.setValue(barTemp + 10);
                 } else{
-                    imageLabel.setText("Not enough coins :(");
+                    emotion.setText("Not enough coins :(");
                 }
 
             } else if (buttonText.equals("Give Water")) {
                 if (coins - 5 >= 0){
-                    imageLabel.setText("GULP GULP GULP");
+                    emotion.setText("GULP GULP GULP");
                     coins -= 5;
                     barTemp = waterBar.getValue();
                     imageLabel.setIcon(happyCatDrinking);
                     waterBar.setValue(barTemp + 10);
                 } else{
-                    imageLabel.setText("Not enough coins :(");
+                    emotion.setText("Not enough coins :(");
                 }
 
             } else if (buttonText.equals("Play")) {
-                imageLabel.setText("HOORAY!!!");
+                emotion.setText("HOORAY!!!");
                 coins += 15;
                 imageLabel.setIcon(happyCatPlaying);
                 playBar.setValue(playBar.getValue() - 20);
@@ -211,36 +213,41 @@ public class Simulator extends JFrame implements ActionListener {
                 }
             } else if (buttonText.equals("Take to Vet")) {
                 if (coins - 25 >= 0){
-                    imageLabel.setText("ALL BETTER :)");
+                    emotion.setText("ALL BETTER :)");
                     coins -= 25;
                     imageLabel.setIcon(happyCatAtVet);
                     vetBar.setValue(100);
                     feedBar.setValue(100);
                     waterBar.setValue(100);
-                    playBar.setValue(100);
                     batheBar.setValue(100);
                     sleepBar.setValue(100);
-                } else{
-                    imageLabel.setText("Not enough coins :(");
+                } else {
+                    emotion.setText("Not enough coins :(");
                 }
 
             } else if (buttonText.equals("Bathe")) {
                 if (coins - 10 >= 0){
-                    imageLabel.setText("SCRUB A DUB DUB");
+                    emotion.setText("SCRUB A DUB DUB");
                     coins -= 10;
                     barTemp = batheBar.getValue();
                     imageLabel.setIcon(happyCatBathing);
                     batheBar.setValue(barTemp + 10);
                 } else{
-                    imageLabel.setText("Not enough coins :(");
+                    emotion.setText("Not enough coins :(");
                 }
 
             } else if (buttonText.equals("Take Nap")) {
-                imageLabel.setText("A HONK SHOO");
-                barTemp = sleepBar.getValue();
-                imageLabel.setIcon(happyCatSleeping);
-                sleepBar.setValue(barTemp + 10);
-                playBar.setValue(playBar.getValue() + 25);
+                if (coins - 5 >= 0) {
+                    emotion.setText("A HONK SHOO");
+                    coins-=5;
+                    barTemp = sleepBar.getValue();
+                    imageLabel.setIcon(happyCatSleeping);
+                    sleepBar.setValue(barTemp + 10);
+                    playBar.setValue(playBar.getValue() + 20);
+                } else {
+                    emotion.setText("Not enough coins :(");
+                }
+
             }
         }
     }
