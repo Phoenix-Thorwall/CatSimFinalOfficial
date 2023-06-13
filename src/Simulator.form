@@ -125,7 +125,7 @@
                 </constraints>
                 <properties>
                   <font name="Menlo" size="12" style="2"/>
-                  <text value="-25 Coins"/>
+                  <text value="-50 Coins"/>
                 </properties>
               </component>
               <component id="54662" class="javax.swing.JLabel">

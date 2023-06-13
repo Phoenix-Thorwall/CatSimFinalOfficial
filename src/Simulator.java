@@ -57,7 +57,7 @@ public class Simulator extends JFrame implements ActionListener {
 
         gameTimer = new Timer(1000, null);
         seconds = 0;
-        coins = 15;
+        coins = 10;
 
 
         happyCat = new ImageIcon("src/happyCat.jpg");
@@ -142,22 +142,20 @@ public class Simulator extends JFrame implements ActionListener {
         if (seconds % 5 == 0){
             waterBar.setValue(waterBar.getValue() - 10);
         }
-        if (seconds % 15 == 0){
+        if (seconds % 10 == 0){
             feedBar.setValue(feedBar.getValue() - 15);
         }
         if (seconds % 20 == 0){
             batheBar.setValue(batheBar.getValue() - 20);
         }
         if (seconds % 25 == 0){
-            sleepBar.setValue(sleepBar.getValue() - 20);
+            sleepBar.setValue(100);
         }
         if ((waterBar.getValue() == 50
                 || feedBar.getValue() == 40
-                || playBar.getValue() == 40
-                || sleepBar.getValue() == 50
                 || batheBar.getValue() == 60)
                 || seconds % 35 == 0){
-            vetBar.setValue(vetBar.getValue() - 15);
+            vetBar.setValue(vetBar.getValue() - 10);
         }
         if (vetBar.getValue() > 40){
             imageLabel.setIcon(happyCat);
@@ -204,23 +202,28 @@ public class Simulator extends JFrame implements ActionListener {
                 }
 
             } else if (buttonText.equals("Play")) {
-                emotion.setText("HOORAY!!!");
-                coins += 15;
-                imageLabel.setIcon(happyCatPlaying);
-                playBar.setValue(playBar.getValue() - 20);
-                if (playBar.getValue() <= 20){
-                    sleepBar.setValue(sleepBar.getValue() - 5);
+                if (playBar.getValue() > 0){
+                    emotion.setText("HOORAY!!!");
+                    coins += 15;
+                    imageLabel.setIcon(happyCatPlaying);
+                    playBar.setValue(playBar.getValue() - 25);
+                    if (playBar.getValue() <= 40){
+                        vetBar.setValue(vetBar.getValue() - 15);
+                    }
+                } else {
+                    emotion.setText("Too tired to play :(");
+                    imageLabel.setIcon(sadCat);
                 }
             } else if (buttonText.equals("Take to Vet")) {
-                if (coins - 25 >= 0){
+                if (coins - 50 >= 0){
                     emotion.setText("ALL BETTER :)");
-                    coins -= 25;
+                    coins -= 50;
                     imageLabel.setIcon(happyCatAtVet);
                     vetBar.setValue(100);
                     feedBar.setValue(100);
                     waterBar.setValue(100);
                     batheBar.setValue(100);
-                    sleepBar.setValue(100);
+                    sleepBar.setValue(sleepBar.getValue() + 50);
                 } else {
                     emotion.setText("Not enough coins :(");
                 }
@@ -237,15 +240,13 @@ public class Simulator extends JFrame implements ActionListener {
                 }
 
             } else if (buttonText.equals("Take Nap")) {
-                if (coins - 5 >= 0) {
+                if (sleepBar.getValue() == 100) {
                     emotion.setText("A HONK SHOO");
-                    coins-=5;
-                    barTemp = sleepBar.getValue();
                     imageLabel.setIcon(happyCatSleeping);
-                    sleepBar.setValue(barTemp + 10);
                     playBar.setValue(playBar.getValue() + 20);
+                    sleepBar.setValue(0);
                 } else {
-                    emotion.setText("Not enough coins :(");
+                    emotion.setText("Not Sleepy >:(");
                 }
 
             }
